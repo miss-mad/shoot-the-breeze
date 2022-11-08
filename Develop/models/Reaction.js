@@ -4,29 +4,38 @@ const reactionSchema = new Schema(
   {
     reactionId: {
       /*
-            Use Mongoose's ObjectId data type
-            Default value is set to a new ObjectId
-            */
+        Use Mongoose's ObjectId data type
+        Default value is set to a new ObjectId
+      */
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
     },
     reactionBody: {
       /*
-            String
-            Required
-            280 character maximum
-            */
+        String
+        Required
+        280 character maximum
+      */
+      type: String,
+      required: true,
+      maxLength: 280,
     },
     username: {
       /*
-            String
-            Required
-            */
+        String
+        Required
+      */
+      type: String,
+      required: true,
     },
     createdAt: {
       /*
-            Date
-            Set default value to the current timestamp
-            Use a getter method to format the timestamp on query
-            */
+        Date
+        Set default value to the current timestamp
+        Use a getter method to format the timestamp on query
+      */
+      type: Date,
+      default: Date.now().getDate(),
     },
   },
   {
@@ -36,3 +45,7 @@ const reactionSchema = new Schema(
     },
   }
 );
+
+// no model created for the reactions; schema only
+
+module.exports = reactionSchema;

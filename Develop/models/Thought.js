@@ -4,31 +4,42 @@ const thoughtSchema = new Schema(
   {
     thoughtText: {
       /*
-            String
-            Required
-            Must be between 1 and 280 characters
-            */
+        String
+        Required
+        Must be between 1 and 280 characters
+      */
+      type: String,
+      required: true,
+      minLength: 1,
+      maxLength: 280,
     },
     createdAt: {
       /*
-            Date
-            Set default value to the current timestamp
-            Use a getter method to format the timestamp on query
-            */
+        Date
+        Set default value to the current timestamp
+        Use a getter method to format the timestamp on query
+      */
+      type: Date,
+      // need both methods?
+      default: Date.now().getDate(),
     },
     username: {
       // (The user that created this thought)
       /*
-            String
-            Required
-            */
+        String
+        Required
+      */
+      type: String,
+      required: true,
     },
-    reactions: {
+    reactions: [
       // (These are like replies)
+      // reaction schema is used as a subdocument here
       /*
-            Array of nested documents created with the reactionSchema
-            */
-    },
+        Array of nested documents created with the reactionSchema
+      */
+      reactionSchema,
+    ],
   },
   {
     // Schema Settings
@@ -39,27 +50,10 @@ const thoughtSchema = new Schema(
   }
 );
 
-/*
-Reaction (SCHEMA ONLY)
+thoughtSchema.virtual("reactionCount").get(function () {
+  return this.reactions.length;
+});
 
-reactionId
-    Use Mongoose's ObjectId data type
-    Default value is set to a new ObjectId
+const Thought = model("thought", thoughtSchema);
 
-reactionBody
-    String
-    Required
-    280 character maximum
-
-username
-    String
-    Required
-
-createdAt
-    Date
-    Set default value to the current timestamp
-    Use a getter method to format the timestamp on query
-
-Schema Settings
-This will not be a model, but rather will be used as the reaction field's subdocument schema in the Thought model.
-*/
+module.exports = Thought;
