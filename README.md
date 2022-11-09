@@ -35,7 +35,19 @@ Below is a screenshot of Shoot the Breeze.
 
 List of resources used:
 
+https://mongoosejs.com/docs/guide.html
 
+https://mongoosejs.com/docs/schematypes.html
+
+https://mongoosejs.com/docs/validation.html#built-in-validators
+
+https://www.name-generator.org.uk/quick/
+
+https://nodejs.org/api/process.html#event-exit
+
+https://www.geeksforgeeks.org/node-js-process-exit-method/
+
+https://www.mongodb.com/docs/manual/reference/method/db.collection.deleteMany/
 
 ## License
 
