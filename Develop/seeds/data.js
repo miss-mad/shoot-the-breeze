@@ -1,14 +1,43 @@
-const mongooseConnection = require("../config/connection");
-const { User, Thought } = require("../models");
+const users = [
+  "Matteo Redfern",
+  "Keane Davila",
+  "Clementine Traynor",
+  "Teresa Curran",
+  "Akaash Chavez",
+  "Tyrone Hayward",
+  "Angelo Chambers",
+  "Aeryn Conway",
+  "Joanne Roth",
+  "Phillippa Bevan",
+];
 
-mongooseConnection.on("error", (err) => err);
+const thoughts = [
+  "thought 1",
+  "thought 2",
+  "thought 3",
+  "thought 4",
+  "thought 5",
+  "thought 6",
+  "thought 7",
+  "thought 8",
+  "thought 9",
+  "thought 10",
+];
 
-mongooseConnection.once("open", () => {
-  console.log("mongoose is connected successfully");
-});
+const findRandomArrayItem = (array) => {
+  return array[Math.floor(Math.random() * array.length)];
+};
 
-User.deleteMany({});
+const findRandomUser = () => `${findRandomArrayItem(users)}`;
 
-Thought.deleteMany({});
+const findRandomThought = (thoughtNumber) => {
+  const thoughtsArray = [];
+  for (let i = 0; i < thoughtsArray; i++) {
+    thoughtsArray.push({ thoughtText: findRandomArrayItem(thoughts) });
+  }
+  return thoughtsArray;
+};
 
-const users = [];
+module.exports = { findRandomUser, findRandomThought };
+
+// module.exports = [users, thoughts];
