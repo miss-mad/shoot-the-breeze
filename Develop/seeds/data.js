@@ -116,7 +116,7 @@ const findMultipleRandomUsers = (numberOfRandomUsers) => {
 const findRandomThought = (thoughtNumber) => {
   const thoughtsArray = [];
   for (let i = 0; i < thoughtNumber; i++) {
-    thoughtsArray.push({ thoughtText: findRandomArrayItem(thoughts) });
+    thoughtsArray.push(findRandomArrayItem(thoughts));
   }
   return thoughtsArray;
 };
@@ -134,6 +134,7 @@ module.exports = {
   emails,
   // thoughts,
   // reactions,
+  findRandomArrayItem,
   // findRandomUser,
   findMultipleRandomUsers,
   findRandomThought,
