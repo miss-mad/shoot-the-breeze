@@ -1,6 +1,11 @@
 const mongooseConnection = require("../config/connection");
 const { User, Thought } = require("../models");
-const { findRandomUser, findRandomThought } = require("./data");
+const {
+  findRandomUser,
+  findMultipleRandomUsers,
+  findRandomThought,
+  findRandomReaction,
+} = require("./data");
 
 // if there's an error connecting, tell us that error
 mongooseConnection.on("error", (err) => err);
@@ -15,18 +20,24 @@ mongooseConnection.once("open", async () => {
   await Thought.deleteMany({});
 
   // inserting 1 of each type - User and Thought - for seed testing
+  // seeding must be done in a certain order because some schemas rely on/reference other schemas. in this case, users need to be seeded first so that the users can then have thoughts
   await User.collection.insertOne({
     username: "fashe",
     email: "afkls@gaks.com",
-    thoughts: [],
-    friends: [],
+    thoughts: findRandomThought(5),
+    friends: findMultipleRandomUsers(5),
   });
 
   await Thought.collection.insertOne({
     thoughtText: "sahleg",
     username: "jsaklgev",
-    reactions: [],
+    reactions: findRandomReaction(5),
   });
+
+  // await Reaction.collection.insertOne({
+  //   reactionBody: findRandomReaction,
+  //   username: findRandomUser,
+  // });
 
   console.log("seeding is done");
   // process is built into node and exit is an event used to end the process currently running
