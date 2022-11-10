@@ -1,6 +1,9 @@
 const mongooseConnection = require("../config/connection");
 const { User, Thought } = require("../models");
 const {
+  users,
+  thoughts,
+  reactions,
   findRandomUser,
   findMultipleRandomUsers,
   findRandomThought,
@@ -21,18 +24,27 @@ mongooseConnection.once("open", async () => {
 
   // inserting 1 of each type - User and Thought - for seed testing
   // seeding must be done in a certain order because some schemas rely on/reference other schemas. in this case, users need to be seeded first so that the users can then have thoughts
-  await User.collection.insertOne({
-    username: "fashe",
-    email: "afkls@gaks.com",
-    thoughts: findRandomThought(5),
-    friends: findMultipleRandomUsers(5),
-  });
+  // await User.collection.insertOne({
+  //   username: "fashe",
+  //   email: "afkls@gaks.com",
+  //   thoughts: findRandomThought(5),
+  //   friends: findMultipleRandomUsers(5),
+  // });
 
-  await Thought.collection.insertOne({
-    thoughtText: "sahleg",
-    username: "jsaklgev",
-    reactions: findRandomReaction(5),
-  });
+  const newUsersArray = [];
+  const thoughts = findRandomThought(5);
+  const friends = findMultipleRandomUsers(5);
+  newUsersArray.push({ users, thoughts, friends });
+
+  await User.collection.insertMany(newUsersArray);
+
+  // await Thought.collection.insertOne({
+  //   thoughtText: "sahleg",
+  //   username: "jsaklgev",
+  //   reactions: findRandomReaction(5),
+  // });
+
+  await Thought.collection.insertMany(thoughts);
 
   // await Reaction.collection.insertOne({
   //   reactionBody: findRandomReaction,
