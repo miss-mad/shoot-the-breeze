@@ -2,7 +2,7 @@ const { User, Thought } = require("../models");
 
 // GET all users
 const getAllUsers = (req, res) => {
-  User.find()
+  User.find({})
     .then((allUsers) => {
       return res.json(allUsers);
     })
@@ -13,7 +13,7 @@ const getAllUsers = (req, res) => {
 };
 
 // GET a single user by its _id and populated thought and friend data
-const getSingleUser = (req, res) => {
+const getOneUser = (req, res) => {
   User.findOne({ _id: req.params.userId })
     .then((singleUser) => {
       singleUser
@@ -123,7 +123,7 @@ const deleteFriend = (req, res) => {
 
 module.exports = {
   getAllUsers,
-  getSingleUser,
+  getOneUser,
   createNewUser,
   updateUser,
   deleteUser,

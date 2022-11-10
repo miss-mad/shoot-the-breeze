@@ -13,7 +13,7 @@ const getAllThoughts = (req, res) => {
 };
 
 // GET a single thought by its _id
-const getSingleThought = (req, res) => {
+const getOneThought = (req, res) => {
   Thought.findOne({ _id: req.params.thoughtId })
     .then((singleThought) => {
       singleThought
@@ -116,7 +116,7 @@ const deleteReaction = (req, res) => {
 
 module.exports = {
   getAllThoughts,
-  getSingleThought,
+  getOneThought,
   createNewThought,
   updateThought,
   deleteThought,
