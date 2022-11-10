@@ -11,17 +11,43 @@
 //   "Phillippa Bevan",
 // ];
 
+// const users = [
+//   { username: "MatteoRedfern", email: "mr@snapi.com" },
+//   { username: "KeaneDavila", email: "kr@snapi.com" },
+//   { username: "ClementineTraynor", email: "ct@snapi.com" },
+//   { username: "TeresaCurran", email: "tc@snapi.com" },
+//   { username: "AkaashChavez", email: "ac@snapi.com" },
+//   { username: "TyroneHayward", email: "th@snapi.com" },
+//   { username: "BeatriceChambers", email: "bc@snapi.com" },
+//   { username: "HaleyThorn", email: "ht@snapi.com" },
+//   { username: "JoanneRoth", email: "jr@snapi.com" },
+//   { username: "PhillippaBevan", email: "pb@snapi.com" },
+// ];
+
 const users = [
-  { username: "MatteoRedfern", email: "mr@snapi.com" },
-  { username: "KeaneDavila", email: "kr@snapi.com" },
-  { username: "ClementineTraynor", email: "ct@snapi.com" },
-  { username: "TeresaCurran", email: "tc@snapi.com" },
-  { username: "AkaashChavez", email: "ac@snapi.com" },
-  { username: "TyroneHayward", email: "th@snapi.com" },
-  { username: "BeatriceChambers", email: "bc@snapi.com" },
-  { username: "HaleyThorn", email: "ht@snapi.com" },
-  { username: "JoanneRoth", email: "jr@snapi.com" },
-  { username: "PhillippaBevan", email: "pb@snapi.com" },
+  { username: "MatteoRedfern" },
+  { username: "KeaneDavila" },
+  { username: "ClementineTraynor" },
+  { username: "TeresaCurran" },
+  { username: "AkaashChavez" },
+  { username: "TyroneHayward" },
+  { username: "BeatriceChambers" },
+  { username: "HaleyThorn" },
+  { username: "JoanneRoth" },
+  { username: "PhillippaBevan" },
+];
+
+const emails = [
+  { email: "mr@snapi.com" },
+  { email: "kr@snapi.com" },
+  { email: "ct@snapi.com" },
+  { email: "tc@snapi.com" },
+  { email: "ac@snapi.com" },
+  { email: "th@snapi.com" },
+  { email: "bc@snapi.com" },
+  { email: "ht@snapi.com" },
+  { email: "jr@snapi.com" },
+  { email: "pb@snapi.com" },
 ];
 
 // const thoughts = [
@@ -38,16 +64,16 @@ const users = [
 // ];
 
 const thoughts = [
-  { thoughtText: "thought 1", username: "MatteoRedfern" },
-  { thoughtText: "thought 2", username: "KeaneDavila" },
-  { thoughtText: "thought 3", username: "ClementineTraynor" },
-  { thoughtText: "thought 4", username: "TeresaCurran" },
-  { thoughtText: "thought 5", username: "AkaashChavez" },
-  { thoughtText: "thought 6", username: "TyroneHayward" },
-  { thoughtText: "thought 7", username: "BeatriceChambers" },
-  { thoughtText: "thought 8", username: "HaleyThorn" },
-  { thoughtText: "thought 9", username: "JoanneRoth" },
-  { thoughtText: "thought 10", username: "PhillippaBevan" },
+  { thoughtText: "thought 1", username2: "MatteoRedfern" },
+  { thoughtText: "thought 2", username2: "KeaneDavila" },
+  { thoughtText: "thought 3", username2: "ClementineTraynor" },
+  { thoughtText: "thought 4", username2: "TeresaCurran" },
+  { thoughtText: "thought 5", username2: "AkaashChavez" },
+  { thoughtText: "thought 6", username2: "TyroneHayward" },
+  { thoughtText: "thought 7", username2: "BeatriceChambers" },
+  { thoughtText: "thought 8", username2: "HaleyThorn" },
+  { thoughtText: "thought 9", username2: "JoanneRoth" },
+  { thoughtText: "thought 10", username2: "PhillippaBevan" },
 ];
 
 const reactions = [
@@ -67,17 +93,25 @@ const findRandomArrayItem = (array) => {
   return array[Math.floor(Math.random() * array.length)];
 };
 
-const findRandomUser = () => {
-  return `${findRandomArrayItem(users)}`;
-};
+// const findRandomUser = () => {
+//   return `${findRandomArrayItem(users)}`;
+// };
 
 const findMultipleRandomUsers = (numberOfRandomUsers) => {
   const randomUsersArray = [];
   for (let i = 0; i < numberOfRandomUsers; i++) {
-    randomUsersArray.push(findRandomUser());
+    randomUsersArray.push(findRandomArrayItem(users));
   }
   return randomUsersArray;
 };
+
+// const findEmailOfUser = (indexOfUser) => {
+//   const randomEmailArray = [];
+//   for (let i = 0; i < indexOfUser; i++) {
+//     users[0]["username"].
+//   }
+//   return randomEmailArray;
+// };
 
 const findRandomThought = (thoughtNumber) => {
   const thoughtsArray = [];
@@ -97,9 +131,10 @@ const findRandomReaction = (reactionNumber) => {
 
 module.exports = {
   users,
+  emails,
   // thoughts,
   // reactions,
-  findRandomUser,
+  // findRandomUser,
   findMultipleRandomUsers,
   findRandomThought,
   findRandomReaction,
