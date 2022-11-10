@@ -49,6 +49,10 @@ https://www.geeksforgeeks.org/node-js-process-exit-method/
 
 https://www.mongodb.com/docs/manual/reference/method/db.collection.deleteMany/
 
+https://expressjs.com/en/guide/routing.html
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_object_literals
+
 ## License
 
 No licenses (default copyright laws apply).
