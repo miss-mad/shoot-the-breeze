@@ -48,7 +48,11 @@ const createNewThought = (req, res) => {
 
 // PUT to update a thought by its _id
 const updateThought = (req, res) => {
-  Thought.findOneAndUpdate({ _id: req.params.thoughtId }, {}, { new: true })
+  Thought.findOneAndUpdate(
+    { _id: req.params.thoughtId },
+    { ...req.body },
+    { new: true }
+  )
     .then((updatedThought) => {
       res.json(updatedThought);
     })

@@ -46,7 +46,11 @@ const createNewUser = (req, res) => {
 
 // PUT to update a user by its _id
 const updateUser = (req, res) => {
-  User.findOneAndUpdate({ _id: req.params.userId }, {}, { new: true })
+  User.findOneAndUpdate(
+    { _id: req.params.userId },
+    { ...req.body },
+    { new: true }
+  )
     .then((updatedUser) => {
       res.json(updatedUser);
     })
