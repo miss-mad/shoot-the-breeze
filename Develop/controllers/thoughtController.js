@@ -38,7 +38,20 @@ example data
 const createNewThought = (req, res) => {
   Thought.create(req.body)
     .then((newThought) => {
-      res.json(newThought);
+      // incl thoughtID inside the user
+      console.log(req.body);
+      User.findOneAndUpdate(
+        { _id: req.body.userId },
+        { $push: { thoughts: newThought._id } },
+        { new: true }
+      )
+        .then((updatedUser) => {
+          console.log({ updatedUser });
+          res.json(newThought);
+        })
+        .catch((err) => {
+          res.status(500).json(err);
+        });
     })
     .catch((err) => {
       console.log(err);

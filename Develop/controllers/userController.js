@@ -3,6 +3,7 @@ const { User, Thought } = require("../models");
 // GET all users
 const getAllUsers = (req, res) => {
   User.find({})
+    .populate("thoughts")
     .then((allUsers) => {
       return res.json(allUsers);
     })
