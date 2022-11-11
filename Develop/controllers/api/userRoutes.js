@@ -44,7 +44,10 @@ example req.body data
 */
 router.route("/:userId").put(updateUser);
 
+// use if deleting user by id
 // http://localhost:3001/api/users/:userId (636dcdde6841c0c3631c8406 - Joanne Roth)
+// use if deleting user by id and the user's associated thoughts
+// http://localhost:3001/api/users/:userId/thoughts/:thoughtId (636dcdcf6841c0c3631c8404 - Haley Thorn) (636ead2f11154b689ac01dfe)
 // DELETE to remove user by its _id
 router.route("/:userId").delete(deleteUser);
 

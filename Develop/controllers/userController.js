@@ -57,8 +57,8 @@ const createNewUser = (req, res) => {
 /*
 example req.body data
 {
-    "username": "HaleyThorn",
-    "email": "thorn@gmail.com"
+    "username": "HaleyThorn-Webster",
+    "email": "hthornwebster@gmail.com"
 }
 */
 const updateUser = (req, res) => {
@@ -77,26 +77,40 @@ const updateUser = (req, res) => {
     });
 };
 
-// http://localhost:3001/api/users/:userId (636dcdde6841c0c3631c8406 - Joanne Roth)
+// http://localhost:3001/api/users/:userId/thoughts/:thoughtId (636dcdcf6841c0c3631c8404 - Haley Thorn) (636ead2f11154b689ac01dfe)
 // DELETE to remove user by its _id
 // BONUS: Remove a user's associated thoughts when deleted
+
+// ^ attempted bonus but could not make it work. leaving it here in the case that one day I figure it out
+// ** no MongoDB equivalent to SQL's ON DELETE CASCADE
+// use trigger instead? maybe multiple deletes?
 const deleteUser = (req, res) => {
-  User.findOneAndRemove({ _id: req.params.userId })
-    .then((deletedUser) => {
-      deletedUser
-        ? Thought.findOneAndRemove(
-            { user: req.params.userId },
-            { $pull: { user: req.params.userId } },
-            { new: true }
-          )
-        : res.status(404).json({ message: "no user found with that id" });
-    })
-    .then((associatedThoughts) => {
-      associatedThoughts
-        ? res.json({ message: "associated thoughts were also deleted" })
-        : res.status(404).json({
-            message: "user deleted, but no associated thoughts were deleted",
-          });
+  console.log(req.params.userId);
+  // console.log(req.params.thoughtId);
+  // cons
+  User.findOneAndRemove(
+    { _id: req.params.userId },
+    // { $pull: { _id: req.params.userId } },
+    // { $pull: { _id: req.params.thoughtId } },
+    { new: true }
+    // { new: true, multi: true }
+  )
+    // .then((deletedUser) => {
+    //   deletedUser
+    //     ? Thought.findOneAndRemove(
+    //         { _id: req.params.thoughtId },
+    //         {
+    //           $pull: {
+    //             thoughts: { _id: req.params.thoughtId },
+    //           },
+    //         },
+    //         { new: true }
+    //       )
+    //     : res.status(404).json({ message: "no user found with that id" });
+    // })
+    .then((data) => {
+      res.json({ message: "user successfully deleted", data: data });
+      // user and their associated thoughts successfully deleted
     })
     .catch((err) => {
       console.log(err);
@@ -162,6 +176,11 @@ const deleteFriend = (req, res) => {
         ? res.json(userWhoseFriendListIsBeingDeletedFrom)
         : res.status(404).json({ message: "no user found with that id" });
     })
+    // .then(
+    //   res.status(200).json({
+    //     message: "friend successfully deleted from user's friend list",
+    //   })
+    // )
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
