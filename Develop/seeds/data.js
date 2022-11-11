@@ -64,16 +64,16 @@ const emails = [
 // ];
 
 const thoughts = [
-  { thoughtText: "thought 1", username2: "MatteoRedfern" },
-  { thoughtText: "thought 2", username2: "KeaneDavila" },
-  { thoughtText: "thought 3", username2: "ClementineTraynor" },
-  { thoughtText: "thought 4", username2: "TeresaCurran" },
-  { thoughtText: "thought 5", username2: "AkaashChavez" },
-  { thoughtText: "thought 6", username2: "TyroneHayward" },
-  { thoughtText: "thought 7", username2: "BeatriceChambers" },
-  { thoughtText: "thought 8", username2: "HaleyThorn" },
-  { thoughtText: "thought 9", username2: "JoanneRoth" },
-  { thoughtText: "thought 10", username2: "PhillippaBevan" },
+  { thoughtText: "thought 1", username: "MatteoRedfern" },
+  { thoughtText: "thought 2", username: "KeaneDavila" },
+  { thoughtText: "Clementine's Times", username: "ClementineTraynor" },
+  { thoughtText: "thought 4", username: "TeresaCurran" },
+  { thoughtText: "thought 5", username: "AkaashChavez" },
+  { thoughtText: "This is what I think about this", username: "TyroneHayward" }, // 636dcdb36841c0c3631c8400
+  { thoughtText: "Very original thought here", username: "BeatriceChambers" }, // 636dcdc36841c0c3631c8402
+  { thoughtText: "look at me now", username: "HaleyThorn" }, // 636dcdcf6841c0c3631c8404
+  { thoughtText: "Gold is my favorite color", username: "JoanneRoth" }, // 636dcdde6841c0c3631c8406
+  { thoughtText: "Summertime and the living's easy", username: "PhillippaBevan" }, // 636dcdea6841c0c3631c8408
 ];
 
 const reactions = [
