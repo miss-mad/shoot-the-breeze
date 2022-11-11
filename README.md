@@ -18,7 +18,7 @@ This app reflects the back-end side of social media apps: Users can create a fri
 
 This challenge does not include a deployed application. Instead, a screen-recorded video is submitted alongside the github repo link.
 
-Video link: 
+Video link: https://drive.google.com/file/d/1UB6qB8Fz7ZMcLKRw_VjJcDwgSqVeXZAs/view
 
 ## Future Improvements
 
