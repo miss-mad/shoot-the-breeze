@@ -14,10 +14,12 @@ const getAllThoughts = (req, res) => {
     });
 };
 
-// http://localhost:3001/api/thoughts/:thoughtId ()
+// http://localhost:3001/api/thoughts/:thoughtId (636dd23784f9c2a93389316e)
 // GET a single thought by its _id
 const getOneThought = (req, res) => {
   Thought.findOne({ _id: req.params.thoughtId })
+    // adding in associated reaction data for that one thought
+    .populate("reactions")
     .then((singleThought) => {
       singleThought
         ? res.json(singleThought)
@@ -34,9 +36,9 @@ const getOneThought = (req, res) => {
 /*
 example req.body data
 {
-  "thoughtText": "Here's a cool thought...",
-  "username": "lernantino",
-  "userId": "5edff358a0fcb779aa7b118b"
+  "thoughtText": "Clementine's Times...",
+  "username": "ClementineTraynor",
+  "userId": "<insert clementine's user id here once user's post request is complete in demo>"
 }
 */
 const createNewThought = (req, res) => {
@@ -49,6 +51,7 @@ const createNewThought = (req, res) => {
         { $push: { thoughts: newThought._id } },
         { new: true }
       )
+        // .populate("reactions")
         .then((updatedUser) => {
           console.log({ updatedUser });
           res.json(newThought);
@@ -63,14 +66,23 @@ const createNewThought = (req, res) => {
     });
 };
 
-// http://localhost:3001/api/thoughts/:thoughtId ()
+// http://localhost:3001/api/thoughts/:thoughtId (636dd1f584f9c2a933893162)
 // PUT to update a thought by its _id
+/*
+example req.body data
+{
+  "thoughtText": "Don't stop me now",
+  "username": "TyroneHayward",
+  "userId": "636dcdb36841c0c3631c8400"
+}
+*/
 const updateThought = (req, res) => {
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
     { ...req.body },
     { new: true }
   )
+    .populate("reactions")
     .then((updatedThought) => {
       res.json(updatedThought);
     })
@@ -79,7 +91,7 @@ const updateThought = (req, res) => {
     });
 };
 
-// http://localhost:3001/api/thoughts/:thoughtId ()
+// http://localhost:3001/api/thoughts/:thoughtId (636dd20884f9c2a933893165)
 // DELETE to remove a thought by its _id
 const deleteThought = (req, res) => {
   Thought.findOneAndRemove({ _id: req.params.thoughtId })
@@ -98,13 +110,23 @@ const deleteThought = (req, res) => {
     });
 };
 
+// http://localhost:3001/api/thoughts/:thoughtId/reactions (636dd22884f9c2a93389316b)
 // POST to create a reaction stored in a single thought's reactions array field
+/*
+example req.body data
+{
+    "_id": "636dc2e13015271744224a86",
+    "reactionBody": "This is me reacting!",
+    "username": "ClementineTraynor"
+}
+*/
 const createReaction = (req, res) => {
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
-    { $addToSet: { reactions: req.body } },
+    { $addToSet: { reactions: req.body._id } },
     { runValidators: true, new: true }
   )
+    .populate("reactions")
     .then((thoughtWhoseArrayFieldHasAnNewlyCreatedReaction) => {
       thoughtWhoseArrayFieldHasAnNewlyCreatedReaction
         ? res.json(thoughtWhoseArrayFieldHasAnNewlyCreatedReaction)
@@ -116,6 +138,7 @@ const createReaction = (req, res) => {
     });
 };
 
+// /api/thoughts/:thoughtId/reactions/:reactionId () ()
 // DELETE to pull and remove a reaction by the reaction's reactionId value
 const deleteReaction = (req, res) => {
   Thought.findOneAndRemove(

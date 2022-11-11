@@ -19,7 +19,7 @@ const {
 // GET all thoughts
 router.route("/").get(getAllThoughts);
 
-// http://localhost:3001/api/thoughts/:thoughtId ()
+// http://localhost:3001/api/thoughts/:thoughtId (636dd23784f9c2a93389316e)
 // GET a single thought by its _id
 router.route("/:thoughtId").get(getOneThought);
 
@@ -28,23 +28,39 @@ router.route("/:thoughtId").get(getOneThought);
 /*
 example req.body data
 {
-  "thoughtText": "Here's a cool thought...",
-  "username": "lernantino",
-  "userId": "5edff358a0fcb779aa7b118b"
+  "thoughtText": "Clementine's Times...",
+  "username": "ClementineTraynor",
+  "userId": "<insert clementine's user id here once user's post request is complete in demo>"
 }
 */
 router.route("/").post(createNewThought);
 
-// http://localhost:3001/api/thoughts/:thoughtId ()
+// http://localhost:3001/api/thoughts/:thoughtId (636dd1f584f9c2a933893162)
 // PUT to update a thought by its _id
+/*
+example req.body data
+{
+  "thoughtText": "Don't stop me now",
+  "username": "TyroneHayward",
+  "userId": "636dcdb36841c0c3631c8400"
+}
+*/
 router.route("/:thoughtId").put(updateThought);
 
-// http://localhost:3001/api/thoughts/:thoughtId ()
+// http://localhost:3001/api/thoughts/:thoughtId (636dd20884f9c2a933893165)
 // DELETE to remove a thought by its _id
 router.route("/:thoughtId").delete(deleteThought);
 
-// /api/thoughts/:thoughtId/reactions
+// /api/thoughts/:thoughtId/reactions (636dd22884f9c2a93389316b)
 // POST to create a reaction stored in a single thought's reactions array field
+/*
+example req.body data
+{
+    "_id": "636dc2e13015271744224a86",
+    "reactionBody": "This is me reacting!",
+    "username": "ClementineTraynor"
+}
+*/
 router.route("/:thoughtId/reactions").post(createReaction);
 
 // /api/thoughts/:thoughtId/reactions/:reactionId

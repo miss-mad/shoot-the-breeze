@@ -15,10 +15,12 @@ const getAllUsers = (req, res) => {
     });
 };
 
-// http://localhost:3001/api/users/:userId (636db1b9a237e61c52b3fa9c)
+// http://localhost:3001/api/users/:userId (636dcdc36841c0c3631c8402 - BeatriceChambers)
 // GET a single user by its _id and populated thought and friend data
 const getOneUser = (req, res) => {
   User.findOne({ _id: req.params.userId })
+    // adding in associated thought data for that one user
+    .populate("thoughts")
     .then((singleUser) => {
       singleUser
         ? res.json(singleUser)
@@ -48,8 +50,15 @@ const createNewUser = (req, res) => {
     });
 };
 
-// http://localhost:3001/api/users/:userId (636db1b9a237e61c52b3fa9c)
+// http://localhost:3001/api/users/:userId (636dcdcf6841c0c3631c8404 - HaleyThorn)
 // PUT to update a user by its _id
+/*
+example req.body data
+{
+    "username": "HaleyThorn",
+    "email": "thorn@gmail.com"
+}
+*/
 const updateUser = (req, res) => {
   User.findOneAndUpdate(
     { _id: req.params.userId },
@@ -64,7 +73,8 @@ const updateUser = (req, res) => {
     });
 };
 
-// http://localhost:3001/api/users/:userId (636db1b9a237e61c52b3fa9c)// DELETE to remove user by its _id
+// http://localhost:3001/api/users/:userId (636dcdde6841c0c3631c8406 - Joanne Roth)
+// DELETE to remove user by its _id
 // BONUS: Remove a user's associated thoughts when deleted
 const deleteUser = (req, res) => {
   User.findOneAndRemove({ _id: req.params.userId })
@@ -90,13 +100,22 @@ const deleteUser = (req, res) => {
     });
 };
 
+// http://localhost:3001/api/users/:userId/friends/:friendId (636dcdc36841c0c3631c8402 - BeatriceChambers) (636dcdea6841c0c3631c8408 - PhillippaBevan) adding Phillippa to Beatrice's friends list
 // POST to add a new friend to a user's friend list
+/*
+example req.body data
+{
+    "_id": "636dcdea6841c0c3631c8408"
+}
+*/
 const addFriend = (req, res) => {
   User.findOneAndUpdate(
     { _id: req.params.userId },
-    { $addToSet: { friends: req.body } },
+    { $addToSet: { friends: req.body._id } },
     { runValidators: true, new: true }
   )
+    .populate("thoughts")
+    .populate("friends")
     .then((userWhoseFriendListIsBeingAddedTo) => {
       userWhoseFriendListIsBeingAddedTo
         ? res.json(userWhoseFriendListIsBeingAddedTo)
@@ -108,11 +127,12 @@ const addFriend = (req, res) => {
     });
 };
 
+// http://localhost:3001/api/users/:userId/friends/:friendId (636dcdc36841c0c3631c8402 - BeatriceChambers) (636dcdea6841c0c3631c8408 - PhillippaBevan) deleting Phillippa from Beatrice's friends list
 // DELETE to remove a friend from a user's friend list
 const deleteFriend = (req, res) => {
   User.findOneAndRemove(
     { _id: req.params.userId },
-    { $pull: { friends: req.params.friendId } },
+    { $pull: { friends: req.params._id } },
     { runValidators: true, new: true }
   )
     .then((userWhoseFriendListIsBeingDeletedFrom) => {
