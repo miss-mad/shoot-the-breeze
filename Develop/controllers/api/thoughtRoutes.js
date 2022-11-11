@@ -30,7 +30,7 @@ example req.body data
 {
   "thoughtText": "Clementine's Times...",
   "username": "ClementineTraynor",
-  "userId": "<insert clementine's user id here once user's post request is complete in demo>"
+  "userId": "<insert clementine's user id here once user's post request is complete in demo> 636e7736c414e8f18ea4dfa3"
 }
 */
 router.route("/").post(createNewThought);
@@ -56,9 +56,8 @@ router.route("/:thoughtId").delete(deleteThought);
 /*
 example req.body data
 {
-    "_id": "636dc2e13015271744224a86",
     "reactionBody": "This is me reacting!",
-    "username": "ClementineTraynor"
+    "username": "PhillippaBevan"
 }
 */
 router.route("/:thoughtId/reactions").post(createReaction);

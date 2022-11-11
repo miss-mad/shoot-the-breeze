@@ -5,6 +5,7 @@ const { User, Thought } = require("../models");
 const getAllUsers = (req, res) => {
   User.find({})
     .populate("thoughts")
+    .populate("friends")
     // cannot populate "reactions" here because reactions are not part of the User schema; instead, they are displayed when the Thought model is used
     .then((allUsers) => {
       return res.json(allUsers);
