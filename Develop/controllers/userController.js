@@ -1,9 +1,11 @@
 const { User, Thought } = require("../models");
 
+// http://localhost:3001/api/users
 // GET all users
 const getAllUsers = (req, res) => {
   User.find({})
     .populate("thoughts")
+    // cannot populate "reactions" here because reactions are not part of the User schema; instead, they are displayed when the Thought model is used
     .then((allUsers) => {
       return res.json(allUsers);
     })
@@ -13,6 +15,7 @@ const getAllUsers = (req, res) => {
     });
 };
 
+// http://localhost:3001/api/users/:userId (636db1b9a237e61c52b3fa9c)
 // GET a single user by its _id and populated thought and friend data
 const getOneUser = (req, res) => {
   User.findOne({ _id: req.params.userId })
@@ -27,15 +30,15 @@ const getOneUser = (req, res) => {
     });
 };
 
+// http://localhost:3001/api/users
 // POST a new user
-/* example data
+/* example req.body data
 {
-  "username": "lernantino",
-  "email": "lernantino@gmail.com"
+    "username": "ClementineTraynor",
+    "email": "ct@snapi.com"
 }
 */
 const createNewUser = (req, res) => {
-  // insert or create?
   User.create(req.body)
     .then((newUser) => {
       res.json(newUser);
@@ -45,6 +48,7 @@ const createNewUser = (req, res) => {
     });
 };
 
+// http://localhost:3001/api/users/:userId (636db1b9a237e61c52b3fa9c)
 // PUT to update a user by its _id
 const updateUser = (req, res) => {
   User.findOneAndUpdate(
@@ -60,7 +64,7 @@ const updateUser = (req, res) => {
     });
 };
 
-// DELETE to remove user by its _id
+// http://localhost:3001/api/users/:userId (636db1b9a237e61c52b3fa9c)// DELETE to remove user by its _id
 // BONUS: Remove a user's associated thoughts when deleted
 const deleteUser = (req, res) => {
   User.findOneAndRemove({ _id: req.params.userId })

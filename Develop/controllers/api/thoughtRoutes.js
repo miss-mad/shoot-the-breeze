@@ -15,23 +15,31 @@ const {
 
 // these requests are also chainable; I can chain them later to make the code cleaner
 
-// /api/thoughts
+// http://localhost:3001/api/thoughts
 // GET all thoughts
 router.route("/").get(getAllThoughts);
 
-// /api/thoughts/:thoughtId
+// http://localhost:3001/api/thoughts/:thoughtId ()
 // GET a single thought by its _id
 router.route("/:thoughtId").get(getOneThought);
 
-// /api/thoughts
+// http://localhost:3001/api/thoughts
 // POST a new thought (don't forget to push the created thought's _id to the associated user's thoughts array field)
+/*
+example req.body data
+{
+  "thoughtText": "Here's a cool thought...",
+  "username": "lernantino",
+  "userId": "5edff358a0fcb779aa7b118b"
+}
+*/
 router.route("/").post(createNewThought);
 
-// /api/thoughts/:thoughtId
+// http://localhost:3001/api/thoughts/:thoughtId ()
 // PUT to update a thought by its _id
 router.route("/:thoughtId").put(updateThought);
 
-// /api/thoughts/:thoughtId
+// http://localhost:3001/api/thoughts/:thoughtId ()
 // DELETE to remove a thought by its _id
 router.route("/:thoughtId").delete(deleteThought);
 

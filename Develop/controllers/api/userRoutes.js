@@ -15,23 +15,29 @@ const {
 
 // these requests are also chainable; I can chain them later to make the code cleaner
 
-// /api/users
+// http://localhost:3001/api/users
 // GET all users
 router.route("/").get(getAllUsers);
 
-// /api/users/:userId
+// http://localhost:3001/api/users/:userId (636db1b9a237e61c52b3fa9c)
 // GET a single user by its _id and populated thought and friend data
 router.route("/:userId").get(getOneUser);
 
-// /api/users
+// http://localhost:3001/api/users
 // POST a new user
+/* example req.body data
+{
+    "username": "ClementineTraynor",
+    "email": "ct@snapi.com"
+}
+*/
 router.route("/").post(createNewUser);
 
-// /api/users/:userId
+// http://localhost:3001/api/users/:userId (636db1b9a237e61c52b3fa9c)
 // PUT to update a user by its _id
 router.route("/:userId").put(updateUser);
 
-// /api/users/:userId
+// http://localhost:3001/api/users/:userId (636db1b9a237e61c52b3fa9c)
 // DELETE to remove user by its _id
 router.route("/:userId").delete(deleteUser);
 
