@@ -1,5 +1,5 @@
 # Shoot the Breeze
-Tagline here!
+Finding associated data has never been easier with this back-end sample API that mimicks popular social media platforms.
 
 ## Table of Contents
 
@@ -28,10 +28,13 @@ Video link:
 
 Below is a screenshot of Shoot the Breeze.
 
-![Shoot the Breeze screenshot 1]()
-![Shoot the Breeze screenshot 2]()
+![Shoot the Breeze screenshot 1](./Develop/assets/images/shoot_the_breeze_screenshot1.JPG)
 
 ## Credits
+
+Collaborators:
+
+Firmin Saint-Amour (Instructor)
 
 List of resources used:
 

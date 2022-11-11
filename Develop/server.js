@@ -23,6 +23,6 @@ app.use(routes);
 db.once("open", () => {
   // now that we've connected to mongoose, listen and console.log the PORT message
   app.listen(PORT, () => {
-    console.log(`Social Network API server running on port ${PORT}`);
+    console.log(`Social Network API server running on http://localhost:${PORT}`);
   });
 });
