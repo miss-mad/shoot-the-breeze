@@ -14,7 +14,7 @@ const getAllThoughts = (req, res) => {
     });
 };
 
-// http://localhost:3001/api/thoughts/:thoughtId (636dd23784f9c2a93389316e)
+// http://localhost:3001/api/thoughts/:thoughtId (636ec787d681a8c5c2217fec) (PhillippaBevan's thought)
 // GET a single thought by its _id
 const getOneThought = (req, res) => {
   Thought.findOne({ _id: req.params.thoughtId })
@@ -66,14 +66,14 @@ const createNewThought = (req, res) => {
     });
 };
 
-// http://localhost:3001/api/thoughts/:thoughtId (636dd1f584f9c2a933893162)
+// http://localhost:3001/api/thoughts/:thoughtId (636ec747d681a8c5c2217fe1)
 // PUT to update a thought by its _id
 /*
 example req.body data
 {
-  "thoughtText": "Don't stop me now",
-  "username": "TyroneHayward",
-  "userId": "636dcdb36841c0c3631c8400"
+"thoughtText": "Don't stop me now - by Queen",
+"username": "BeatriceChambers",
+"userId": "636ebe894284fa9a9c929b29"
 }
 */
 const updateThought = (req, res) => {
@@ -91,7 +91,7 @@ const updateThought = (req, res) => {
     });
 };
 
-// http://localhost:3001/api/thoughts/:thoughtId (636dd20884f9c2a933893165)
+// http://localhost:3001/api/thoughts/:thoughtId (636ec766d681a8c5c2217fe5) (HaleyThorn's thought)
 // DELETE to remove a thought by its _id
 const deleteThought = (req, res) => {
   Thought.findOneAndRemove({ _id: req.params.thoughtId })
@@ -111,7 +111,7 @@ const deleteThought = (req, res) => {
     });
 };
 
-// http://localhost:3001/api/thoughts/:thoughtId/reactions (636dd22884f9c2a93389316b)
+// http://localhost:3001/api/thoughts/:thoughtId/reactions (636ec725d681a8c5c2217fda) (TyroneHayward's thought)
 // POST to create a reaction stored in a single thought's reactions array field
 /*
 example req.body data
@@ -144,7 +144,7 @@ const createReaction = (req, res) => {
 };
 // console.log(Thought.populated("reactions"));
 
-// http://localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId (636dd22884f9c2a93389316b) (636e7be40af879a1152e8982)
+// http://localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId (636ec725d681a8c5c2217fda) (636ec9ded681a8c5c2217fff) (Deleting BeatriceChambers' reaction from TyroneHayward's thought)
 // DELETE to pull and remove a reaction by the reaction's reactionId value
 const deleteReaction = (req, res) => {
   console.log("test");
@@ -154,7 +154,7 @@ const deleteReaction = (req, res) => {
     { _id: req.params.thoughtId },
     {
       $pull: {
-        reactions: { _id: req.params.reactionId },
+        reactions: { reactionId: req.params.reactionId },
       },
     },
     { new: true }
