@@ -69,11 +69,11 @@ const thoughts = [
   { thoughtText: "Clementine's Times", username: "ClementineTraynor" },
   { thoughtText: "thought 4", username: "TeresaCurran" },
   { thoughtText: "thought 5", username: "AkaashChavez" },
-  { thoughtText: "This is what I think about this", username: "TyroneHayward" }, // 636dcdb36841c0c3631c8400
-  { thoughtText: "Very original thought here", username: "BeatriceChambers" }, // 636dcdc36841c0c3631c8402
-  { thoughtText: "look at me now", username: "HaleyThorn" }, // 636dcdcf6841c0c3631c8404
-  { thoughtText: "Gold is my favorite color", username: "JoanneRoth" }, // 636dcdde6841c0c3631c8406
-  { thoughtText: "Summertime and the living's easy", username: "PhillippaBevan" }, // 636dcdea6841c0c3631c8408
+  { thoughtText: "Every little thing gonna be alright", username: "TyroneHayward" }, // 636ebe754284fa9a9c929b27
+  { thoughtText: "Don't stop me now", username: "BeatriceChambers" }, // 636ebe894284fa9a9c929b29
+  { thoughtText: "And I think it's gonna be a long, long time", username: "HaleyThorn" }, // 636ebe9d4284fa9a9c929b2b
+  { thoughtText: "Blackbird singing in the dead of night", username: "JoanneRoth" }, // 636ebeab4284fa9a9c929b2d
+  { thoughtText: "Summertime and the living's easy", username: "PhillippaBevan" }, // 636ebeb64284fa9a9c929b2f
 ];
 
 const reactions = [
