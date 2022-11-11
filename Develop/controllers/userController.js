@@ -22,6 +22,7 @@ const getOneUser = (req, res) => {
   User.findOne({ _id: req.params.userId })
     // adding in associated thought data for that one user
     .populate("thoughts")
+    .populate("friends")
     .then((singleUser) => {
       singleUser
         ? res.json(singleUser)
@@ -66,6 +67,8 @@ const updateUser = (req, res) => {
     { ...req.body },
     { new: true }
   )
+    .populate("thoughts")
+    .populate("friends")
     .then((updatedUser) => {
       res.json(updatedUser);
     })
@@ -131,12 +134,30 @@ const addFriend = (req, res) => {
 // http://localhost:3001/api/users/:userId/friends/:friendId (636dcdc36841c0c3631c8402 - BeatriceChambers) (636dcdea6841c0c3631c8408 - PhillippaBevan) deleting Phillippa from Beatrice's friends list
 // DELETE to remove a friend from a user's friend list
 const deleteFriend = (req, res) => {
-  User.findOneAndRemove(
+  // User.find({ _id: req.params.userId })
+  //   .then((deletedFriend) => {
+  //     deletedFriend
+  //       ? User.findOneAndUpdate(
+  //           { id: req.params.userId },
+  //           { $pull: { friends: req.params.friendId } },
+  //           { new: true }
+  //         )
+  //       : res.status(404).json({ message: "no friend found with that id" });
+  //   })
+
+  console.log(req.params.userId);
+  console.log(req.params.friendId);
+  User.findOneAndUpdate(
     { _id: req.params.userId },
-    { $pull: { friends: req.params._id } },
-    { runValidators: true, new: true }
+    {
+      $pull: {
+        friends: { $in: [req.params.friendId] },
+      },
+    },
+    { new: true }
   )
     .then((userWhoseFriendListIsBeingDeletedFrom) => {
+      // console.log(userWhoseFriendListIsBeingDeletedFrom);
       userWhoseFriendListIsBeingDeletedFrom
         ? res.json(userWhoseFriendListIsBeingDeletedFrom)
         : res.status(404).json({ message: "no user found with that id" });
