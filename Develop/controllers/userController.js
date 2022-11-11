@@ -85,9 +85,8 @@ const updateUser = (req, res) => {
 // ** no MongoDB equivalent to SQL's ON DELETE CASCADE
 // use trigger instead? maybe multiple deletes?
 const deleteUser = (req, res) => {
-  console.log(req.params.userId);
+  // console.log(req.params.userId);
   // console.log(req.params.thoughtId);
-  // cons
   User.findOneAndRemove(
     { _id: req.params.userId },
     // { $pull: { _id: req.params.userId } },
@@ -97,14 +96,15 @@ const deleteUser = (req, res) => {
   )
     // .then((deletedUser) => {
     //   deletedUser
-    //     ? Thought.findOneAndRemove(
-    //         { _id: req.params.thoughtId },
-    //         {
-    //           $pull: {
-    //             thoughts: { _id: req.params.thoughtId },
-    //           },
-    //         },
-    //         { new: true }
+    //     ? Thought.deleteMany(
+    //         { username: User.username }
+            // { _id: req.params.thoughtId },
+            // {
+            //   $pull: {
+            //     thoughts: { _id: req.params.thoughtId },
+            //   },
+            // },
+            // { new: true }
     //       )
     //     : res.status(404).json({ message: "no user found with that id" });
     // })
