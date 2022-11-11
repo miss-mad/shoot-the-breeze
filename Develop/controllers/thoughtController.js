@@ -153,7 +153,7 @@ const deleteReaction = (req, res) => {
     { _id: req.params.thoughtId },
     {
       $pull: {
-        reactions: { $in: [req.params.reactionId] },
+        reactions: { _id: req.params.reactionId },
       },
     },
     { new: true }
