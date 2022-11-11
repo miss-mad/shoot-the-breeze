@@ -1,6 +1,6 @@
 const mongooseConnection = require("../config/connection");
 const { User, Thought } = require("../models");
-let {
+const {
   users,
   emails,
   thoughts,
@@ -35,20 +35,27 @@ mongooseConnection.once("open", async () => {
 
   const newUsersArray = [];
 
-  // for (let i = 0; i < newUsersArray.length; i++) {
-  users = findMultipleRandomUsers(1);
-  emails = findRandomArrayItem(emails);
-  thoughts = findRandomThought(1);
-  friends = findMultipleRandomUsers(1);
+  for (let i = 0; i < 10; i++) {
+    const userz = findMultipleRandomUsers(1);
+    const emailz = findRandomArrayItem(emails);
+    const thoughtz = findRandomThought(1);
+    const friendz = findMultipleRandomUsers(1);
 
-  console.log("users: ", users);
-  console.log("emails: ", emails);
-  console.log("thoughts: ", thoughts);
-  console.log("friends: ", friends);
+    console.log("users: ", userz);
+    console.log("emails: ", emailz);
+    console.log("thoughts: ", thoughtz);
+    console.log("friends: ", friendz);
 
-  newUsersArray.push({ users, emails, thoughts, friends });
-  // return newUsersArray;
-  // }
+    console.log({ userz, emailz, thoughtz, friendz });
+    newUsersArray.push({
+      users: userz,
+      emails: emailz,
+      thoughts: thoughtz,
+      friends: friendz,
+    });
+    console.log(newUsersArray);
+    // return newUsersArray;
+  }
 
   await User.collection.insertMany(newUsersArray);
 
