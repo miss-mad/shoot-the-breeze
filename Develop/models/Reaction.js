@@ -35,7 +35,7 @@ const reactionSchema = new Schema(
         Use a getter method to format the timestamp on query
       */
       type: Date,
-      default: Date.now().getDate(),
+      default: Date.now(),
     },
   },
   {
