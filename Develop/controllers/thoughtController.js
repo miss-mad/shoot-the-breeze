@@ -115,18 +115,22 @@ const deleteThought = (req, res) => {
 /*
 example req.body data
 {
-    "_id": "636dc2e13015271744224a86",
     "reactionBody": "This is me reacting!",
     "username": "ClementineTraynor"
 }
 */
 const createReaction = (req, res) => {
+  // console.log(Thought.populated("reactions"));
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
-    { $addToSet: { reactions: req.body._id } },
+    { $addToSet: { reactions: {...req.body} } },
     { runValidators: true, new: true }
   )
     .populate("reactions")
+    // .populate({
+    //   path: "reactions",
+    //   populate: { path: "thoughts", model: "Thought" },
+    // })
     .then((thoughtWhoseArrayFieldHasAnNewlyCreatedReaction) => {
       thoughtWhoseArrayFieldHasAnNewlyCreatedReaction
         ? res.json(thoughtWhoseArrayFieldHasAnNewlyCreatedReaction)
@@ -137,6 +141,7 @@ const createReaction = (req, res) => {
       res.status(500).json(err);
     });
 };
+// console.log(Thought.populated("reactions"));
 
 // /api/thoughts/:thoughtId/reactions/:reactionId () ()
 // DELETE to pull and remove a reaction by the reaction's reactionId value
