@@ -60,6 +60,6 @@ router.route("/:userId/friends/:friendId").post(addFriend);
 
 // http://localhost:3001/api/users/:userId/friends/:friendId (636dcdc36841c0c3631c8402 - BeatriceChambers) (636dcdea6841c0c3631c8408 - PhillippaBevan) deleting Phillippa from Beatrice's friends list
 // DELETE to remove a friend from a user's friend list
-router.route("/userId/friends/:friendsId").delete(deleteFriend);
+router.route("/:userId/friends/:friendId").delete(deleteFriend);
 
 module.exports = router;

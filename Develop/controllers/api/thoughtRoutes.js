@@ -51,7 +51,7 @@ router.route("/:thoughtId").put(updateThought);
 // DELETE to remove a thought by its _id
 router.route("/:thoughtId").delete(deleteThought);
 
-// /api/thoughts/:thoughtId/reactions (636dd22884f9c2a93389316b)
+// http://localhost:3001/api/thoughts/:thoughtId/reactions (636dd22884f9c2a93389316b)
 // POST to create a reaction stored in a single thought's reactions array field
 /*
 example req.body data
@@ -62,7 +62,7 @@ example req.body data
 */
 router.route("/:thoughtId/reactions").post(createReaction);
 
-// /api/thoughts/:thoughtId/reactions/:reactionId
+// http://localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId
 // DELETE to pull and remove a reaction by the reaction's reactionId value
 router.route("/:thoughtId/reactions/:reactionId").delete(deleteReaction);
 
