@@ -104,6 +104,7 @@ const deleteThought = (req, res) => {
           )
         : res.status(404).json({ message: "no thought found with that id" });
     })
+    // .then(res.status(200).json({message: "thought successfully deleted"}))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -163,6 +164,7 @@ const deleteReaction = (req, res) => {
         ? res.json(thoughtWhoseArrayFieldIsBeingDeletedFrom)
         : res.status(404).json({ message: "no thought found with that id" });
     })
+    // .then(res.status(200).json({message: "reaction successfully deleted from that thought"}))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
