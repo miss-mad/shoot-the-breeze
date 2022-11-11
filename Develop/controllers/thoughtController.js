@@ -1,8 +1,10 @@
 const { User, Thought } = require("../models");
 
+// http://localhost:3001/api/thoughts
 // GET all thoughts
 const getAllThoughts = (req, res) => {
-  Thought.find()
+  Thought.find({})
+    .populate("reactions")
     .then((allThoughts) => {
       res.json(allThoughts);
     })
@@ -12,6 +14,7 @@ const getAllThoughts = (req, res) => {
     });
 };
 
+// http://localhost:3001/api/thoughts/:thoughtId ()
 // GET a single thought by its _id
 const getOneThought = (req, res) => {
   Thought.findOne({ _id: req.params.thoughtId })
@@ -26,9 +29,10 @@ const getOneThought = (req, res) => {
     });
 };
 
+// http://localhost:3001/api/thoughts
 // POST a new thought (don't forget to push the created thought's _id to the associated user's thoughts array field)
 /*
-example data
+example req.body data
 {
   "thoughtText": "Here's a cool thought...",
   "username": "lernantino",
@@ -59,6 +63,7 @@ const createNewThought = (req, res) => {
     });
 };
 
+// http://localhost:3001/api/thoughts/:thoughtId ()
 // PUT to update a thought by its _id
 const updateThought = (req, res) => {
   Thought.findOneAndUpdate(
@@ -74,6 +79,7 @@ const updateThought = (req, res) => {
     });
 };
 
+// http://localhost:3001/api/thoughts/:thoughtId ()
 // DELETE to remove a thought by its _id
 const deleteThought = (req, res) => {
   Thought.findOneAndRemove({ _id: req.params.thoughtId })
