@@ -98,7 +98,7 @@ const deleteThought = (req, res) => {
     .then((deletedThought) => {
       deletedThought
         ? Thought.findOneAndRemove(
-            { thought: req.params.thoughtId },
+            { _id: req.params.thoughtId },
             { $pull: { user: req.params.thoughtId } },
             { new: true }
           )
@@ -116,14 +116,14 @@ const deleteThought = (req, res) => {
 example req.body data
 {
     "reactionBody": "This is me reacting!",
-    "username": "ClementineTraynor"
+    "username": "PhillippaBevan"
 }
 */
 const createReaction = (req, res) => {
   // console.log(Thought.populated("reactions"));
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
-    { $addToSet: { reactions: {...req.body} } },
+    { $addToSet: { reactions: { ...req.body } } },
     { runValidators: true, new: true }
   )
     .populate("reactions")
@@ -143,12 +143,20 @@ const createReaction = (req, res) => {
 };
 // console.log(Thought.populated("reactions"));
 
-// /api/thoughts/:thoughtId/reactions/:reactionId () ()
+// http://localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId (636dd22884f9c2a93389316b) (636e7be40af879a1152e8982)
 // DELETE to pull and remove a reaction by the reaction's reactionId value
 const deleteReaction = (req, res) => {
-  Thought.findOneAndRemove(
+  console.log("test");
+  console.log(req.params.thoughtId);
+  console.log(req.params.reactionId);
+  Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
-    { $pull: { reactions: req.params.reactionId } }
+    {
+      $pull: {
+        reactions: { $in: [req.params.reactionId] },
+      },
+    },
+    { new: true }
   )
     .then((thoughtWhoseArrayFieldIsBeingDeletedFrom) => {
       thoughtWhoseArrayFieldIsBeingDeletedFrom
